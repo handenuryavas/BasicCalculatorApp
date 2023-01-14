@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var calculatorResults: UILabel!
     
     var workings: String = ""
+    var isOpenedParathesis: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,18 +54,20 @@ class ViewController: UIViewController {
         clearAll()
     }
     
-    @IBAction func backTap(_ sender: Any)
-    {
-        if(!workings.isEmpty)
-             {
-            workings.removeLast()
-            calculatorWorkings.text = workings
+    
+    @IBAction func pressedButtonParanthesis(_ sender: Any) {
+        if isOpenedParathesis {
+            isOpenedParathesis = false
+            // kapat
+            addToWorkings(value: ")")
+        } else {
+            // ac
+            isOpenedParathesis = true
+            addToWorkings(value: "(")
         }
     }
     
-    @IBAction func closeParanthesesTap() {
-        addToWorkings(value: ")")
-    }
+  
     
     func addToWorkings(value: String)
     {
@@ -146,10 +149,12 @@ class ViewController: UIViewController {
         addToWorkings(value: "6")
     }
     
+    
     @IBAction func sevenTap(_ sender: Any)
     {
         addToWorkings(value: "7")
     }
+    
     
     @IBAction func eightTap(_ sender: Any)
     {
